@@ -1,9 +1,9 @@
 package com.philliphsu.bottomsheetpickers.time.numberpad;
 
 import android.content.Context;
-import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayout;
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
+import androidx.gridlayout.widget.GridLayout;
 import android.util.AttributeSet;
 import android.widget.TextView;
 

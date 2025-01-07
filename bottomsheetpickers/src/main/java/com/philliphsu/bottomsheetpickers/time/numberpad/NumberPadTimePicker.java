@@ -6,9 +6,9 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.IntDef;
-import android.support.v4.graphics.drawable.DrawableCompat;
+
+import androidx.annotation.IntDef;
+import androidx.core.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
@@ -246,13 +246,13 @@ public class NumberPadTimePicker extends LinearLayout implements INumberPadTimeP
         }
 
         @Override
-        public final NumberPadTimePickerThemer setInputTimeTextColor(@ColorInt int color) {
+        public final NumberPadTimePickerThemer setInputTimeTextColor(int color) {
             mTimeDisplay.setTextColor(color);
             return this;
         }
 
         @Override
-        public final NumberPadTimePickerThemer setInputAmPmTextColor(@ColorInt int color) {
+        public final NumberPadTimePickerThemer setInputAmPmTextColor(int color) {
             mAmPmDisplay.setTextColor(color);
             return this;
         }

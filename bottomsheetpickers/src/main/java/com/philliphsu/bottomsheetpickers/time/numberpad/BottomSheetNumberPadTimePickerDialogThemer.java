@@ -2,8 +2,8 @@ package com.philliphsu.bottomsheetpickers.time.numberpad;
 
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 /**
  * Interface through which a {@link NumberPadTimePicker} contained in
@@ -26,7 +26,7 @@ class BottomSheetNumberPadTimePickerDialogThemer extends NumberPadTimePickerDial
     }
 
     @Override
-    public BottomSheetNumberPadTimePickerDialogThemer setFabRippleColor(@ColorInt int color) {
+    public BottomSheetNumberPadTimePickerDialogThemer setFabRippleColor(int color) {
         mTimePickerComponent.setFabRippleColor(color);
         return this;
     }
@@ -62,12 +62,12 @@ class BottomSheetNumberPadTimePickerDialogThemer extends NumberPadTimePickerDial
     }
 
     @Override
-    public BottomSheetNumberPadTimePickerDialogThemer setInputTimeTextColor(@ColorInt int color) {
+    public BottomSheetNumberPadTimePickerDialogThemer setInputTimeTextColor(int color) {
         return (BottomSheetNumberPadTimePickerDialogThemer) super.setInputTimeTextColor(color);
     }
 
     @Override
-    public BottomSheetNumberPadTimePickerDialogThemer setInputAmPmTextColor(@ColorInt int color) {
+    public BottomSheetNumberPadTimePickerDialogThemer setInputAmPmTextColor(int color) {
         return (BottomSheetNumberPadTimePickerDialogThemer) super.setInputAmPmTextColor(color);
     }
 

@@ -1,7 +1,7 @@
 package com.philliphsu.bottomsheetpickers.time.numberpad;
 
 import android.content.res.ColorStateList;
-import android.support.annotation.ColorInt;
+
 
 /**
  * Adds {@link NumberPadTimePicker#LAYOUT_BOTTOM_SHEET bottom sheet} theming APIs
@@ -10,7 +10,7 @@ import android.support.annotation.ColorInt;
 interface BottomSheetNumberPadTimePickerThemer extends NumberPadTimePickerThemer {
     BottomSheetNumberPadTimePickerThemer setFabBackgroundColor(ColorStateList colors);
 
-    BottomSheetNumberPadTimePickerThemer setFabRippleColor(@ColorInt int color);
+    BottomSheetNumberPadTimePickerThemer setFabRippleColor(int color);
 
     BottomSheetNumberPadTimePickerThemer setFabIconTint(ColorStateList tint);
 

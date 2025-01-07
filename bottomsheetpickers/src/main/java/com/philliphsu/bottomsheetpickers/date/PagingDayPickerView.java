@@ -23,11 +23,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
+
+import androidx.annotation.NonNull;
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,7 +47,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import static android.support.v4.content.ContextCompat.getColor;
+import static androidx.core.content.ContextCompat.getColor;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 /**
@@ -211,7 +211,7 @@ class PagingDayPickerView extends LinearLayout implements OnDateChangedListener,
         mThemeDark = themeDark;
     }
 
-    void setAccentColor(@ColorInt int color) {
+    void setAccentColor(int color) {
         mAccentColor = color;
         mMonthPickerView.setCurrentMonthTextColor(color);
         mMonthPickerView.setSelectedCirclePaintColor(color);

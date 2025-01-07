@@ -21,10 +21,10 @@ import android.app.TimePickerDialog;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.v4.content.ContextCompat;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -242,11 +242,11 @@ public class NumberPadTimePickerDialog extends BottomSheetTimePickerDialog
     /**
      * Set the color of the header text that stores the inputted time.
      */
-    public final void setHeaderTextColor(@ColorInt int color) {
+    public final void setHeaderTextColor(int color) {
         mHeaderTextColor = color;
     }
 
-    private @ColorInt int getDefaultHeaderTextColor() {
+    private int getDefaultHeaderTextColor() {
         return getDefaultHeaderTextColorSelected();
     }
     
@@ -276,7 +276,7 @@ public class NumberPadTimePickerDialog extends BottomSheetTimePickerDialog
         /**
          * Set the color of the header text that stores the inputted time.
          */
-        public Builder setHeaderTextColor(@ColorInt int color) {
+        public Builder setHeaderTextColor(int color) {
             mHeaderTextColor = color;
             return this;
         }

@@ -16,7 +16,7 @@
 
 package com.philliphsu.bottomsheetpickers.time;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.ViewGroup;
 
 import com.philliphsu.bottomsheetpickers.BottomSheetPickerDialog;

@@ -30,12 +30,12 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
-import android.support.annotation.AttrRes;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.graphics.drawable.DrawableCompat;
+import androidx.annotation.AttrRes;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.graphics.drawable.DrawableCompat;
 import android.text.format.Time;
 import android.view.View;
 import android.widget.ImageView;
@@ -229,7 +229,7 @@ public class Utils {
         target.setImageDrawable(drawable);
     }
 
-    public static void setTint(Drawable drawable, @ColorInt int color) {
+    public static void setTint(Drawable drawable, int color) {
         drawable = DrawableCompat.wrap(drawable.mutate());
         DrawableCompat.setTint(drawable, color);
     }
@@ -239,7 +239,7 @@ public class Utils {
      * borderless variant, whichever was set as the background.
      * @param view the view that should have its highlight color changed
      */
-    public static void setColorControlHighlight(@NonNull View view, @ColorInt int color) {
+    public static void setColorControlHighlight(@NonNull View view, int color) {
         Drawable selectableItemBackground = view.getBackground();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
                 && selectableItemBackground instanceof RippleDrawable) {
@@ -291,7 +291,7 @@ public class Utils {
         }
     }
 
-    public static void applyTint(ImageView view, @ColorInt int color) {
+    public static void applyTint(ImageView view, int color) {
         Drawable drawable = view.getDrawable();
         setTint(drawable, color);
         view.setImageDrawable(drawable);

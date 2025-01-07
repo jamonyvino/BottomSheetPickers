@@ -16,7 +16,7 @@
 
 package com.philliphsu.bottomsheetpickers.date;
 
-import android.support.annotation.ColorInt;
+
 
 import java.util.Calendar;
 
@@ -70,22 +70,22 @@ public class BottomSheetDatePickerDialog extends DatePickerDialog {
         }
 
         @Override
-        public Builder setHeaderTextColorSelected(@ColorInt int color) {
+        public Builder setHeaderTextColorSelected(int color) {
             return (Builder) super.setHeaderTextColorSelected(color);
         }
 
         @Override
-        public Builder setHeaderTextColorUnselected(@ColorInt int color) {
+        public Builder setHeaderTextColorUnselected(int color) {
             return (Builder) super.setHeaderTextColorUnselected(color);
         }
 
         @Override
-        public Builder setDayOfWeekHeaderTextColorSelected(@ColorInt int color) {
+        public Builder setDayOfWeekHeaderTextColorSelected(int color) {
             return (Builder) super.setDayOfWeekHeaderTextColorSelected(color);
         }
 
         @Override
-        public Builder setDayOfWeekHeaderTextColorUnselected(@ColorInt int color) {
+        public Builder setDayOfWeekHeaderTextColorUnselected(int color) {
             return (Builder) super.setDayOfWeekHeaderTextColorUnselected(color);
         }
 

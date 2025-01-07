@@ -1,4 +1,7 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+// Plugins block (must be placed after buildscript {})
+// plugins {
+//     id 'maven-publish'
+// }
 
 buildscript {
     repositories {
@@ -41,18 +44,4 @@ ext {
     versionCode = 11
 
     supportLibraryVersion = '33.0.0'
-}
-
-// Plugins block (must be placed after buildscript {})
-plugins {
-    id 'maven-publish'
-}
-
-// Publishing block (move to module if needed)
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
 }

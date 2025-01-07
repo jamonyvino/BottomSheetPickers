@@ -2,8 +2,8 @@ package com.philliphsu.bottomsheetpickers.time.numberpad;
 
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import static com.philliphsu.bottomsheetpickers.time.numberpad.Preconditions.checkNotNull;
 
@@ -19,13 +19,13 @@ class NumberPadTimePickerDialogThemer implements NumberPadTimePickerThemer {
     }
 
     @Override
-    public NumberPadTimePickerDialogThemer setInputTimeTextColor(@ColorInt int color) {
+    public NumberPadTimePickerDialogThemer setInputTimeTextColor(int color) {
         mTimePickerComponent.setInputTimeTextColor(color);
         return this;
     }
 
     @Override
-    public NumberPadTimePickerDialogThemer setInputAmPmTextColor(@ColorInt int color) {
+    public NumberPadTimePickerDialogThemer setInputAmPmTextColor(int color) {
         mTimePickerComponent.setInputAmPmTextColor(color);
         return this;
     }

@@ -18,8 +18,8 @@ package com.philliphsu.bottomsheetpickers.time.grid;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.annotation.ColorInt;
-import android.support.v4.content.ContextCompat;
+
+import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -186,7 +186,7 @@ public abstract class NumbersGrid extends TimePickerPadLayout implements View.On
         }
     }
 
-    void setAccentColor(@ColorInt int color) {
+    void setAccentColor(int color) {
         mSelectedTextColor = color;
     }
 

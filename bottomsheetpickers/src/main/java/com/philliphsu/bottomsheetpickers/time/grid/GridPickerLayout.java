@@ -17,7 +17,7 @@
 package com.philliphsu.bottomsheetpickers.time.grid;
 
 import android.content.Context;
-import android.support.annotation.ColorInt;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.animation.AlphaAnimation;
@@ -117,7 +117,7 @@ public class GridPickerLayout extends ViewAnimator implements NumbersGrid.OnNumb
         mMinutesGrid.setTheme(context, themeDark);
     }
 
-    void setAccentColor(@ColorInt int color) {
+    void setAccentColor(int color) {
         if (m24HoursGrid != null) {
             m24HoursGrid.setAccentColor(color);
         } else if (mHoursGrid != null) {

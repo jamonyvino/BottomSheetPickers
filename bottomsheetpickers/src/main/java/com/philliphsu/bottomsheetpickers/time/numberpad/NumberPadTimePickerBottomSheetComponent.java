@@ -9,13 +9,13 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StyleableRes;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.widget.GridLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleableRes;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.gridlayout.widget.GridLayout;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,7 +119,7 @@ final class NumberPadTimePickerBottomSheetComponent extends NumberPadTimePicker.
     }
 
     @Override
-    public BottomSheetNumberPadTimePickerThemer setFabRippleColor(@ColorInt int color) {
+    public BottomSheetNumberPadTimePickerThemer setFabRippleColor(int color) {
         mOkButton.setRippleColor(color);
         return this;
     }

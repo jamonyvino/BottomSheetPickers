@@ -6,8 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,7 +18,7 @@ import com.philliphsu.bottomsheetpickers.Utils;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
-import static android.support.v4.content.ContextCompat.getColor;
+import static androidx.core.content.ContextCompat.getColor;
 import static com.philliphsu.bottomsheetpickers.date.PagingDayPickerView.MONTH_NAVIGATION_BAR_SIZE;
 
 /**
@@ -149,7 +149,7 @@ public final class MonthPickerView extends View {
      * Make sure to call {@link #initView()} after calling this so that our Paints can be updated.
      * </p>
      */
-    void setCurrentMonthTextColor(@ColorInt int color) {
+    void setCurrentMonthTextColor(int color) {
         mCurrentMonthTextColor = color;
     }
 
@@ -159,7 +159,7 @@ public final class MonthPickerView extends View {
      * Make sure to call {@link #initView()} after calling this so that our Paints can be updated.
      * </p>
      */
-    void setSelectedCirclePaintColor(@ColorInt int color) {
+    void setSelectedCirclePaintColor(int color) {
         mSelectedCirclePaint.setColor(color);
     }
 

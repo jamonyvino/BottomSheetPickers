@@ -22,9 +22,9 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.design.widget.FloatingActionButton;
-import android.support.graphics.drawable.VectorDrawableCompat;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import android.util.Log;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
@@ -162,21 +162,21 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
     /**
      * Set the color of the header text when it is selected.
      */
-    public final void setHeaderTextColorSelected(@ColorInt int color) {
+    public final void setHeaderTextColorSelected(int color) {
         mHeaderTextColorSelected = color;
     }
 
     /**
      * Set the color of the header text when it is not selected.
      */
-    public final void setHeaderTextColorUnselected(@ColorInt int color) {
+    public final void setHeaderTextColorUnselected(int color) {
         mHeaderTextColorUnselected = color;
     }
 
     /**
      * Set the color of the time separator that separates the hour and minute views in the header.
      */
-    public final void setTimeSeparatorColor(@ColorInt int color) {
+    public final void setTimeSeparatorColor(int color) {
         mTimeSeparatorColor = color;
     }
 
@@ -184,7 +184,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
      * Set the color of the AM/PM text when it is selected. This is equivalent to
      * {@link #setHalfDayButtonColorSelected(int)} in 24-hour time.
      */
-    public final void setAmPmTextColorSelected(@ColorInt int color) {
+    public final void setAmPmTextColorSelected(int color) {
         setHalfDayButtonColorSelected(color);
     }
 
@@ -192,7 +192,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
      * Set the color of the AM/PM text when it is not selected. This is equivalent to
      * {@link #setHalfDayButtonColorUnselected(int)} in 24-hour time.
      */
-    public final void setAmPmTextColorUnselected(@ColorInt int color) {
+    public final void setAmPmTextColorUnselected(int color) {
         setHalfDayButtonColorUnselected(color);
     }
 
@@ -200,7 +200,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
      * Set the color of the half-day image button when it is selected. This is equivalent to
      * {@link #setAmPmTextColorSelected(int)} in 12-hour time.
      */
-    public final void setHalfDayButtonColorSelected(@ColorInt int color) {
+    public final void setHalfDayButtonColorSelected(int color) {
         mHalfDayButtonColorSelected = color;
     }
 
@@ -208,7 +208,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
      * Set the color of the half-day image button when it is not selected. This is equivalent to
      * {@link #setAmPmTextColorUnselected(int)} in 12-hour time.
      */
-    public final void setHalfDayButtonColorUnselected(@ColorInt int color) {
+    public final void setHalfDayButtonColorUnselected(int color) {
         mHalfDayButtonColorUnselected = color;
     }
 
@@ -1039,7 +1039,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
         /**
          * Set the color of the header text when it is selected.
          */
-        public Builder setHeaderTextColorSelected(@ColorInt int color) {
+        public Builder setHeaderTextColorSelected(int color) {
             mHeaderTextColorSelected = color;
             return this;
         }
@@ -1047,7 +1047,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
         /**
          * Set the color of the header text when it is not selected.
          */
-        public Builder setHeaderTextColorUnselected(@ColorInt int color) {
+        public Builder setHeaderTextColorUnselected(int color) {
             mHeaderTextColorUnselected = color;
             return this;
         }
@@ -1055,7 +1055,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
         /**
          * Set the color of the time separator that separates the hour and minute views in the header.
          */
-        public Builder setTimeSeparatorColor(@ColorInt int color) {
+        public Builder setTimeSeparatorColor(int color) {
             mTimeSeparatorColor = color;
             return this;
         }
@@ -1064,7 +1064,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
          * Set the color of the AM/PM text when it is selected. This is equivalent to
          * {@link #setHalfDayButtonColorSelected(int)} in 24-hour time.
          */
-        public Builder setAmPmTextColorSelected(@ColorInt int color) {
+        public Builder setAmPmTextColorSelected(int color) {
             setHalfDayButtonColorSelected(color);
             return this;
         }
@@ -1073,7 +1073,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
          * Set the color of the AM/PM text when it is not selected. This is equivalent to
          * {@link #setHalfDayButtonColorUnselected(int)} in 24-hour time.
          */
-        public Builder setAmPmTextColorUnselected(@ColorInt int color) {
+        public Builder setAmPmTextColorUnselected(int color) {
             setHalfDayButtonColorUnselected(color);
             return this;
         }
@@ -1082,7 +1082,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
          * Set the color of the half-day image button when it is selected. This is equivalent to
          * {@link #setAmPmTextColorSelected(int)} in 12-hour time.
          */
-        public Builder setHalfDayButtonColorSelected(@ColorInt int color) {
+        public Builder setHalfDayButtonColorSelected(int color) {
             mHalfDayButtonColorSelected = color;
             return this;
         }
@@ -1091,7 +1091,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
          * Set the color of the half-day image button when it is not selected. This is equivalent to
          * {@link #setAmPmTextColorUnselected(int)} in 12-hour time.
          */
-        public Builder setHalfDayButtonColorUnselected(@ColorInt int color) {
+        public Builder setHalfDayButtonColorUnselected(int color) {
             mHalfDayButtonColorUnselected = color;
             return this;
         }

@@ -3,16 +3,16 @@ package com.philliphsu.bottomsheetpickers;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetDialogFragment;
+
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import static android.support.v4.content.ContextCompat.getColor;
+import static androidx.core.content.ContextCompat.getColor;
 
 /**
  * Created by Phillip Hsu on 10/4/2016.
@@ -44,7 +44,6 @@ public abstract class BottomSheetPickerDialog extends BottomSheetDialogFragment 
     protected int mHeaderColor;
     protected boolean mHeaderTextDark;
 
-    @LayoutRes
     protected abstract int contentLayout();
 
     @Override
@@ -131,7 +130,7 @@ public abstract class BottomSheetPickerDialog extends BottomSheetDialogFragment 
      * If this picker is using the light theme and you did not call {@link #setHeaderColor(int)},
      * this color will also be applied to the dialog's header.
      */
-    public final void setAccentColor(@ColorInt int color) {
+    public final void setAccentColor(int color) {
         mAccentColor = color;
     }
 
@@ -139,7 +138,7 @@ public abstract class BottomSheetPickerDialog extends BottomSheetDialogFragment 
      * Set the background color. If this color is dark, consider
      * setting the theme dark to ensure text in the picker has enough contrast.
      */
-    public final void setBackgroundColor(@ColorInt int color) {
+    public final void setBackgroundColor(int color) {
         mBackgroundColor = color;
     }
 
@@ -151,7 +150,7 @@ public abstract class BottomSheetPickerDialog extends BottomSheetDialogFragment 
      * {@code colorAccent} or the accent color set with {@link #setAccentColor(int)}.
      * </p>
      */
-    public final void setHeaderColor(@ColorInt int color) {
+    public final void setHeaderColor(int color) {
         mHeaderColor = color;
     }
 
