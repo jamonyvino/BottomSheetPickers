@@ -1,4 +1,8 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library' // 또는 'com.android.application' depending on your project
+    id 'maven-publish'
+}
+
 
 ext {
     bintrayRepo = 'maven'
