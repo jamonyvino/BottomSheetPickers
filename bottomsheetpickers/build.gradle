@@ -1,7 +1,4 @@
-plugins {
-    id 'maven-publish'
-    id 'com.android.library'
-}
+apply plugin: 'com.android.library'
 
 ext {
     bintrayRepo = 'maven'
@@ -16,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/philliphsu/BottomSheetPickers'
     gitUrl = 'https://github.com/philliphsu/BottomSheetPickers.git'
 
-    libraryVersion = rootProject.ext.versionName
+    libraryVersion = '2.3.0'
 
     developerId = 'philliphsu'
     developerName = 'Phillip Hsu'
@@ -28,57 +25,31 @@ ext {
 }
 
 android {
-    namespace 'com.example.namespace'
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    namespace "com.philliphsu.bottomsheetpickers"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        minSdkVersion 14
+        targetSdkVersion 28
+        versionCode 5
+        versionName "2.3.0"
         vectorDrawables.useSupportLibrary = true
-        // TODO: If we ever remove the duplicate number pad classes in this library and instead
-        // import our NumberPadTimePicker library, we can safely remove this line. The remaining
-        // classes in this library have no issue building with Proguard for release build type,
-        // so we don't have any exclusion rules to add.
-        consumerProguardFiles 'proguard-rules.pro'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
 }
 
 dependencies {
-    // androidx.annotation 관련 클래스들
-    implementation 'androidx.annotation:annotation:1.6.0' // IntDef, NonNull, Nullable 등
-    
-    // androidx.core 라이브러리 (ContextCompat)
-    implementation 'androidx.core:core:1.8.0'
-
-    // androidx.appcompat (AppCompatActivity 등)
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-
-    // androidx.design (FloatingActionButton 등)
-    implementation 'com.google.android.material:material:1.9.0'
-
-    // androidx.recyclerview (GridLayout 등)
-    implementation 'androidx.recyclerview:recyclerview:1.3.0'
-
-    // GridLayout을 위한 의존성
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
-    implementation 'androidx.customview:customview:1.1.0'
-
-    // 기타 필요한 androidx 라이브러리 추가
-    // 예: androidx.lifecycle, androidx.constraintlayout 등
+    implementation 'com.google.android.material:material:1.0.0'
 }
-
-
-// Publishing block (move to module if needed)
-// publishing {
-//     publications {
-//         mavenJava(MavenPublication) {
-//             from components.java
-//         }
-//     }
-// }
-
-// apply from: '../install.gradle'
-// apply from: '../bintray.gradle'
+//
+//apply from: '../install.gradle'
+//apply from: '../bintray.gradle'

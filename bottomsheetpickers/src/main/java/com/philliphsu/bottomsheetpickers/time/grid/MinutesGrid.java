@@ -46,8 +46,8 @@ public class MinutesGrid extends NumbersGrid {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        mMinusButton = (ImageButton) findViewById(R.id.bsp_dec_min);
-        mPlusButton = (ImageButton) findViewById(R.id.bsp_inc_min);
+        mMinusButton = (ImageButton) findViewById(R.id.dec_min);
+        mPlusButton = (ImageButton) findViewById(R.id.inc_min);
         // We're not doing method binding because we don't have IDs set on these buttons.
         mMinusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +87,7 @@ public class MinutesGrid extends NumbersGrid {
     void setTheme(Context context, boolean themeDark) {
         super.setTheme(context, themeDark);
         if (!themeDark) {
-            final int colorActiveLight = ContextCompat.getColor(context, R.color.bsp_icon_color_active_light);
+            final int colorActiveLight = ContextCompat.getColor(context, R.color.icon_color_active_light);
             Utils.applyTint(mMinusButton, colorActiveLight);
             Utils.applyTint(mPlusButton, colorActiveLight);
         }

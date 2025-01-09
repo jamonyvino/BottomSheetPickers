@@ -3,11 +3,11 @@ package com.philliphsu.bottomsheetpickers;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import androidx.annotation.ColorInt;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +44,7 @@ public abstract class BottomSheetPickerDialog extends BottomSheetDialogFragment 
     protected int mHeaderColor;
     protected boolean mHeaderTextDark;
 
+    @LayoutRes
     protected abstract int contentLayout();
 
     @Override
@@ -59,12 +60,12 @@ public abstract class BottomSheetPickerDialog extends BottomSheetDialogFragment 
         }
         // Prepare common colors.
         final Context ctx = getActivity();
-        mDarkGray = getColor(ctx, R.color.bsp_dark_gray);
-        mLightGray = getColor(ctx, R.color.bsp_light_gray);
+        mDarkGray = getColor(ctx, R.color.dark_gray);
+        mLightGray = getColor(ctx, R.color.light_gray);
         mWhite = getColor(ctx, android.R.color.white);
-        mWhiteTextDisabled = getColor(ctx, R.color.bsp_text_color_disabled_dark);
-        mBlackText = getColor(ctx, R.color.bsp_text_color_primary_light);
-        mBlackTextDisabled = getColor(ctx, R.color.bsp_text_color_disabled_light);
+        mWhiteTextDisabled = getColor(ctx, R.color.text_color_disabled_dark);
+        mBlackText = getColor(ctx, R.color.text_color_primary_light);
+        mBlackTextDisabled = getColor(ctx, R.color.text_color_disabled_light);
     }
 
     @Nullable
@@ -83,23 +84,20 @@ public abstract class BottomSheetPickerDialog extends BottomSheetDialogFragment 
             mHeaderColor = mThemeDark ? mLightGray : mAccentColor;
         }
 
-        if (contentLayout() != 0) {
-            View view = inflater.inflate(contentLayout(), container, false);
-            // Set background color of entire view
-            // TODO: Remove setting of this in subclasses.
-            view.setBackgroundColor(mBackgroundColor);
-            return view;
-        }
+        View view = inflater.inflate(contentLayout(), container, false);
+        // Set background color of entire view
+        // TODO: Remove setting of this in subclasses.
+        view.setBackgroundColor(mBackgroundColor);
 
-        return null;
+        return view;
     }
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public final Dialog onCreateDialog(Bundle savedInstanceState) {
         // TODO: Pass in a dark/light BottomSheetDialog theme depending on the theme set.
         // Verify this changes colors for text, selectableBackground, etc. appropriately.
-        return new CustomWidthBottomSheetDialog(getContext(), R.style.BSP_BottomSheetDialogTheme);
+        return new CustomWidthBottomSheetDialog(getContext(), R.style.BottomSheetDialogTheme);
     }
 
     @Override
@@ -130,7 +128,7 @@ public abstract class BottomSheetPickerDialog extends BottomSheetDialogFragment 
      * If this picker is using the light theme and you did not call {@link #setHeaderColor(int)},
      * this color will also be applied to the dialog's header.
      */
-    public final void setAccentColor(int color) {
+    public final void setAccentColor(@ColorInt int color) {
         mAccentColor = color;
     }
 
@@ -138,7 +136,7 @@ public abstract class BottomSheetPickerDialog extends BottomSheetDialogFragment 
      * Set the background color. If this color is dark, consider
      * setting the theme dark to ensure text in the picker has enough contrast.
      */
-    public final void setBackgroundColor(int color) {
+    public final void setBackgroundColor(@ColorInt int color) {
         mBackgroundColor = color;
     }
 
@@ -150,7 +148,7 @@ public abstract class BottomSheetPickerDialog extends BottomSheetDialogFragment 
      * {@code colorAccent} or the accent color set with {@link #setAccentColor(int)}.
      * </p>
      */
-    public final void setHeaderColor(int color) {
+    public final void setHeaderColor(@ColorInt int color) {
         mHeaderColor = color;
     }
 
@@ -186,55 +184,29 @@ public abstract class BottomSheetPickerDialog extends BottomSheetDialogFragment 
         private int mHeaderColor;
         private boolean mHeaderTextDark;
         private boolean mThemeDark;
-        private boolean mThemeSetAtRuntime;
 
-        /**
-         * Set the accent color. This color is primarily used to tint views in the picker.
-         * If this picker is using the light theme and you did not call {@link #setHeaderColor(int)},
-         * this color will also be applied to the dialog's header.
-         */
         public Builder setAccentColor(int accentColor) {
             mAccentColor = accentColor;
             return this;
         }
 
-        /**
-         * Set the background color. If this color is dark, consider
-         * setting the theme dark to ensure text in the picker has enough contrast.
-         */
         public Builder setBackgroundColor(int backgroundColor) {
             mBackgroundColor = backgroundColor;
             return this;
         }
 
-        /**
-         * Set the header color. If this color is light, consider
-         * setting the header text dark to ensure it has enough contrast.
-         * <p>
-         * If this picker is using the light theme, this will normally be your Activity's
-         * {@code colorAccent} or the accent color set with {@link #setAccentColor(int)}.
-         * </p>
-         */
         public Builder setHeaderColor(int headerColor) {
             mHeaderColor = headerColor;
             return this;
         }
 
-        /**
-         * Set the header text to use a light or dark color.
-         * The default is false, so a light color is applied.
-         */
         public Builder setHeaderTextDark(boolean headerTextDark) {
             mHeaderTextDark = headerTextDark;
             return this;
         }
 
-        /**
-         * Set a dark or light theme.
-         */
         public Builder setThemeDark(boolean themeDark) {
             mThemeDark = themeDark;
-            mThemeSetAtRuntime = true;
             return this;
         }
 
@@ -250,9 +222,7 @@ public abstract class BottomSheetPickerDialog extends BottomSheetDialogFragment 
             dialog.setBackgroundColor(mBackgroundColor);
             dialog.setHeaderColor(mHeaderColor);
             dialog.setHeaderTextDark(mHeaderTextDark);
-            if (mThemeSetAtRuntime) {
-                dialog.setThemeDark(mThemeDark);
-            }
+            dialog.setThemeDark(mThemeDark);
         }
         
         public abstract BottomSheetPickerDialog build();

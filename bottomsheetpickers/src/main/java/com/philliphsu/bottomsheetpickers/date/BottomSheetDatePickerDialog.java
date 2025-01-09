@@ -16,7 +16,7 @@
 
 package com.philliphsu.bottomsheetpickers.date;
 
-
+import androidx.annotation.ColorInt;
 
 import java.util.Calendar;
 
@@ -39,12 +39,6 @@ public class BottomSheetDatePickerDialog extends DatePickerDialog {
      * DatePickerDialog.Builder} to maintain forward compatibility with potential future client code.
      */
     public static final class Builder extends DatePickerDialog.Builder {
-        /**
-         * @param listener    How the parent is notified that the date is set.
-         * @param year        The initial year of the dialog.
-         * @param monthOfYear The initial month of the dialog.
-         * @param dayOfMonth  The initial day of the dialog.
-         */
         public Builder(OnDateSetListener listener, int year, int monthOfYear, int dayOfMonth) {
             super(listener, year, monthOfYear, dayOfMonth);
         }
@@ -70,22 +64,22 @@ public class BottomSheetDatePickerDialog extends DatePickerDialog {
         }
 
         @Override
-        public Builder setHeaderTextColorSelected(int color) {
+        public Builder setHeaderTextColorSelected(@ColorInt int color) {
             return (Builder) super.setHeaderTextColorSelected(color);
         }
 
         @Override
-        public Builder setHeaderTextColorUnselected(int color) {
+        public Builder setHeaderTextColorUnselected(@ColorInt int color) {
             return (Builder) super.setHeaderTextColorUnselected(color);
         }
 
         @Override
-        public Builder setDayOfWeekHeaderTextColorSelected(int color) {
+        public Builder setDayOfWeekHeaderTextColorSelected(@ColorInt int color) {
             return (Builder) super.setDayOfWeekHeaderTextColorSelected(color);
         }
 
         @Override
-        public Builder setDayOfWeekHeaderTextColorUnselected(int color) {
+        public Builder setDayOfWeekHeaderTextColorUnselected(@ColorInt int color) {
             return (Builder) super.setDayOfWeekHeaderTextColorUnselected(color);
         }
 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingStart="@dimen/month_view_edge_padding"
+              android:paddingLeft="@dimen/month_view_edge_padding"
+              android:paddingEnd="@dimen/month_view_edge_padding"
+              android:paddingRight="@dimen/month_view_edge_padding"
+              android:paddingTop="@dimen/month_view_top_padding">
+
+    <ImageButton
+        android:id="@+id/prev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/month_navigation_bar_height"
+        android:minHeight="@dimen/month_navigation_bar_height"
+        android:visibility="invisible"
+        android:contentDescription="@string/date_picker_prev_month_button"
+        android:nextFocusForward="@+id/month_year_title"
+        android:nextFocusDown="@+id/month_view"
+        app:srcCompat="@drawable/ic_chevron_start"
+        style="@style/SelectableButton"/>
+
+    <FrameLayout
+        android:id="@+id/month_year_title_container"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/month_navigation_bar_height"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/month_year_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:contentDescription="@string/date_picker_month_year_title"
+            android:nextFocusForward="@+id/next"
+            android:nextFocusDown="@+id/month_view"
+            android:textSize="@dimen/month_label_size"
+            android:textAllCaps="false"
+            android:drawablePadding="4dp"/>
+
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/month_navigation_bar_height"
+        android:minHeight="@dimen/month_navigation_bar_height"
+        android:visibility="invisible"
+        android:contentDescription="@string/date_picker_next_month_button"
+        android:nextFocusForward="@+id/month_view"
+        android:nextFocusDown="@+id/month_view"
+        app:srcCompat="@drawable/ic_chevron_end"
+        style="@style/SelectableButton"/>
+
+</LinearLayout>

@@ -18,7 +18,7 @@ package com.philliphsu.bottomsheetpickers.time.grid;
 
 import android.content.Context;
 import android.graphics.Typeface;
-
+import androidx.annotation.ColorInt;
 import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -60,7 +60,7 @@ public abstract class NumbersGrid extends TimePickerPadLayout implements View.On
     public NumbersGrid(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mIsInitialized = false;
-        mDefaultTextColor = ContextCompat.getColor(context, R.color.bsp_text_color_primary_light);
+        mDefaultTextColor = ContextCompat.getColor(context, R.color.text_color_primary_light);
         // The reason we can use the Context passed here and get the correct accent color
         // is that this NumbersGrid is programmatically created by the GridSelectorLayout in
         // its initialize(), and the Context passed in there is from
@@ -168,7 +168,7 @@ public abstract class NumbersGrid extends TimePickerPadLayout implements View.On
      */
     void setTheme(Context context, boolean themeDark) {
         mDefaultTextColor = ContextCompat.getColor(context, themeDark?
-                R.color.bsp_text_color_primary_dark : R.color.bsp_text_color_primary_light);
+                R.color.text_color_primary_dark : R.color.text_color_primary_light);
         for (int i = 0; i < getChildCount(); i++) {
             View v = getChildAt(i);
             // TODO: We can move this to the ctor, because this isn't dependent on the theme.
@@ -186,7 +186,7 @@ public abstract class NumbersGrid extends TimePickerPadLayout implements View.On
         }
     }
 
-    void setAccentColor(int color) {
+    void setAccentColor(@ColorInt int color) {
         mSelectedTextColor = color;
     }
 

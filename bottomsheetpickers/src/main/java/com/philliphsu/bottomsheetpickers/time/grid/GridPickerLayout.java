@@ -17,7 +17,7 @@
 package com.philliphsu.bottomsheetpickers.time.grid;
 
 import android.content.Context;
-
+import androidx.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.animation.AlphaAnimation;
@@ -80,7 +80,7 @@ public class GridPickerLayout extends ViewAnimator implements NumbersGrid.OnNumb
         // code that REALLY needs to be done in this class instead.
         mIs24HourMode = is24HourMode;
         if (is24HourMode) {
-            m24HoursGrid = (TwentyFourHoursGrid) inflate(context, R.layout.bsp_pad_24_hours, null);
+            m24HoursGrid = (TwentyFourHoursGrid) inflate(context, R.layout.pad_24_hours, null);
             m24HoursGrid.initialize(this/*OnNumberSelectedListener*/);
             if (initialHoursOfDay >= 12) {
                 // 24 hour grid is always initialized with 00-11 in the primary position
@@ -88,11 +88,11 @@ public class GridPickerLayout extends ViewAnimator implements NumbersGrid.OnNumb
             }
             addView(m24HoursGrid);
         } else {
-            mHoursGrid = (HoursGrid) inflate(context, R.layout.bsp_pad_12_hours, null);
+            mHoursGrid = (HoursGrid) inflate(context, R.layout.pad_12_hours, null);
             mHoursGrid.initialize(this/*OnNumberSelectedListener*/);
             addView(mHoursGrid);
         }
-        mMinutesGrid = (MinutesGrid) inflate(context, R.layout.bsp_pad_minutes, null);
+        mMinutesGrid = (MinutesGrid) inflate(context, R.layout.pad_minutes, null);
         mMinutesGrid.initialize(this/*OnNumberSelectedListener*/);
         addView(mMinutesGrid);
 
@@ -117,7 +117,7 @@ public class GridPickerLayout extends ViewAnimator implements NumbersGrid.OnNumb
         mMinutesGrid.setTheme(context, themeDark);
     }
 
-    void setAccentColor(int color) {
+    void setAccentColor(@ColorInt int color) {
         if (m24HoursGrid != null) {
             m24HoursGrid.setAccentColor(color);
         } else if (mHoursGrid != null) {
@@ -171,12 +171,12 @@ public class GridPickerLayout extends ViewAnimator implements NumbersGrid.OnNumb
         // Only highlight on TVs
         if (Utils.isTv(getContext())) {
             if (index == MINUTE_INDEX) {
-                findViewById(R.id.bsp_minute_0).requestFocus();
+                findViewById(R.id.minute_0).requestFocus();
             } else if (index == HOUR_INDEX) {
-                if (findViewById(R.id.bsp_hour_0_12) != null) {
-                    findViewById(R.id.bsp_hour_0_12).requestFocus();
+                if (findViewById(R.id.hour_0_12) != null) {
+                    findViewById(R.id.hour_0_12).requestFocus();
                 } else {
-                    findViewById(R.id.bsp_hour_1).requestFocus();
+                    findViewById(R.id.hour_1).requestFocus();
                 }
             }
         }

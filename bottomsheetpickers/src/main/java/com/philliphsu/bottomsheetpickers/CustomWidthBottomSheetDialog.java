@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
- import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import android.view.ViewGroup;
 
 final class CustomWidthBottomSheetDialog extends BottomSheetDialog {
@@ -15,7 +15,7 @@ final class CustomWidthBottomSheetDialog extends BottomSheetDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int width = getContext().getResources().getDimensionPixelSize(R.dimen.bsp_bottom_sheet_width);
+        int width = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_width);
         getWindow().setLayout(width > 0 ? width : ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
     }

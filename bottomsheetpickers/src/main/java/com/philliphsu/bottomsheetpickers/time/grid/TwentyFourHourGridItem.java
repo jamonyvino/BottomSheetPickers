@@ -40,10 +40,10 @@ public class TwentyFourHourGridItem extends LinearLayout {
         final int orientation = context.getResources().getConfiguration().orientation;
         setOrientation(orientation == Configuration.ORIENTATION_PORTRAIT ? VERTICAL : HORIZONTAL);
         setGravity(Gravity.CENTER);
-        inflate(getContext(), R.layout.bsp_content_24h_grid_item, this);
+        inflate(getContext(), R.layout.content_24h_grid_item, this);
 
-        mPrimaryText = (TextView) findViewById(R.id.bsp_primary);
-        mSecondaryText = (TextView) findViewById(R.id.bsp_secondary);
+        mPrimaryText = (TextView) findViewById(R.id.primary);
+        mSecondaryText = (TextView) findViewById(R.id.secondary);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
                 R.styleable.TwentyFourHourGridItem, 0, 0);

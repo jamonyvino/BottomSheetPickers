@@ -31,7 +31,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import androidx.annotation.AttrRes;
-
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -185,7 +185,7 @@ public class Utils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return getColorFromThemeAttr(context, android.R.attr.colorAccent);
         }
-        return getColorFromThemeAttr(context, R.attr.colorAccent);
+        return getColorFromThemeAttr(context, R.color.colorAccent);
     }
 
     /**
@@ -197,7 +197,7 @@ public class Utils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return getColorFromThemeAttr(context, android.R.attr.colorPrimary);
         }
-        return getColorFromThemeAttr(context, R.attr.colorPrimary);
+        return getColorFromThemeAttr(context, R.color.colorPrimary);
     }
 
     public static int getColorFromThemeAttr(Context context, int resid) {
@@ -229,7 +229,7 @@ public class Utils {
         target.setImageDrawable(drawable);
     }
 
-    public static void setTint(Drawable drawable, int color) {
+    public static void setTint(Drawable drawable, @ColorInt int color) {
         drawable = DrawableCompat.wrap(drawable.mutate());
         DrawableCompat.setTint(drawable, color);
     }
@@ -239,7 +239,7 @@ public class Utils {
      * borderless variant, whichever was set as the background.
      * @param view the view that should have its highlight color changed
      */
-    public static void setColorControlHighlight(@NonNull View view, int color) {
+    public static void setColorControlHighlight(@NonNull View view, @ColorInt int color) {
         Drawable selectableItemBackground = view.getBackground();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
                 && selectableItemBackground instanceof RippleDrawable) {
@@ -291,7 +291,7 @@ public class Utils {
         }
     }
 
-    public static void applyTint(ImageView view, int color) {
+    public static void applyTint(ImageView view, @ColorInt int color) {
         Drawable drawable = view.getDrawable();
         setTint(drawable, color);
         view.setImageDrawable(drawable);

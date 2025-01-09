@@ -19,10 +19,8 @@ package com.philliphsu.bottomsheetpickers.time.grid;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-
+import androidx.annotation.ColorInt;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import android.util.Log;
@@ -126,15 +124,9 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
 
     @Override
     protected int contentLayout() {
-        return R.layout.bsp_dialog_time_picker_grid;
+        return R.layout.dialog_time_picker_grid;
     }
 
-    /**
-     * @param callback      How the parent is notified that the time is set.
-     * @param hourOfDay     The initial hour-of-day of the dialog.
-     * @param minute        The initial minute of the dialog.
-     * @param is24HourMode  Whether the dialog should be configured for 24-hour mode.
-     */
     public static GridTimePickerDialog newInstance(OnTimeSetListener callback,
                                                    int hourOfDay, int minute, boolean is24HourMode) {
         GridTimePickerDialog ret = new GridTimePickerDialog();
@@ -162,21 +154,21 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
     /**
      * Set the color of the header text when it is selected.
      */
-    public final void setHeaderTextColorSelected(int color) {
+    public final void setHeaderTextColorSelected(@ColorInt int color) {
         mHeaderTextColorSelected = color;
     }
 
     /**
      * Set the color of the header text when it is not selected.
      */
-    public final void setHeaderTextColorUnselected(int color) {
+    public final void setHeaderTextColorUnselected(@ColorInt int color) {
         mHeaderTextColorUnselected = color;
     }
 
     /**
      * Set the color of the time separator that separates the hour and minute views in the header.
      */
-    public final void setTimeSeparatorColor(int color) {
+    public final void setTimeSeparatorColor(@ColorInt int color) {
         mTimeSeparatorColor = color;
     }
 
@@ -184,7 +176,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
      * Set the color of the AM/PM text when it is selected. This is equivalent to
      * {@link #setHalfDayButtonColorSelected(int)} in 24-hour time.
      */
-    public final void setAmPmTextColorSelected(int color) {
+    public final void setAmPmTextColorSelected(@ColorInt int color) {
         setHalfDayButtonColorSelected(color);
     }
 
@@ -192,7 +184,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
      * Set the color of the AM/PM text when it is not selected. This is equivalent to
      * {@link #setHalfDayButtonColorUnselected(int)} in 24-hour time.
      */
-    public final void setAmPmTextColorUnselected(int color) {
+    public final void setAmPmTextColorUnselected(@ColorInt int color) {
         setHalfDayButtonColorUnselected(color);
     }
 
@@ -200,7 +192,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
      * Set the color of the half-day image button when it is selected. This is equivalent to
      * {@link #setAmPmTextColorSelected(int)} in 12-hour time.
      */
-    public final void setHalfDayButtonColorSelected(int color) {
+    public final void setHalfDayButtonColorSelected(@ColorInt int color) {
         mHalfDayButtonColorSelected = color;
     }
 
@@ -208,7 +200,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
      * Set the color of the half-day image button when it is not selected. This is equivalent to
      * {@link #setAmPmTextColorUnselected(int)} in 12-hour time.
      */
-    public final void setHalfDayButtonColorUnselected(int color) {
+    public final void setHalfDayButtonColorUnselected(@ColorInt int color) {
         mHalfDayButtonColorUnselected = color;
     }
 
@@ -230,7 +222,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
             Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         KeyboardListener keyboardListener = new KeyboardListener();
-        view.findViewById(R.id.bsp_time_picker_dialog).setOnKeyListener(keyboardListener);
+        view.findViewById(R.id.time_picker_dialog).setOnKeyListener(keyboardListener);
 
         if (!mThemeSetAtRuntime) {
             mThemeDark = Utils.isDarkTheme(getActivity(), mThemeDark);
@@ -238,22 +230,22 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
 
         final Resources res = getResources();
         final Context ctx = getActivity();
-        mHourPickerDescription = res.getString(R.string.bsp_hour_picker_description);
-        mSelectHours = res.getString(R.string.bsp_select_hours);
-        mMinutePickerDescription = res.getString(R.string.bsp_minute_picker_description);
-        mSelectMinutes = res.getString(R.string.bsp_select_minutes);
+        mHourPickerDescription = res.getString(R.string.hour_picker_description);
+        mSelectHours = res.getString(R.string.select_hours);
+        mMinutePickerDescription = res.getString(R.string.minute_picker_description);
+        mSelectMinutes = res.getString(R.string.select_minutes);
 
-        mHourView = (TextView) view.findViewById(R.id.bsp_hours);
+        mHourView = (TextView) view.findViewById(R.id.hours);
         mHourView.setOnKeyListener(keyboardListener);
-        mHourSpaceView = (TextView) view.findViewById(R.id.bsp_hour_space);
-        mMinuteSpaceView = (TextView) view.findViewById(R.id.bsp_minutes_space);
-        mMinuteView = (TextView) view.findViewById(R.id.bsp_minutes);
+        mHourSpaceView = (TextView) view.findViewById(R.id.hour_space);
+        mMinuteSpaceView = (TextView) view.findViewById(R.id.minutes_space);
+        mMinuteView = (TextView) view.findViewById(R.id.minutes);
         mMinuteView.setOnKeyListener(keyboardListener);
         // TODO: setOnKeyListener?
-        mAmPmToggles = (LinearLayout) view.findViewById(R.id.bsp_ampm_toggles);
-        mAmTextView = (TextView) view.findViewById(R.id.bsp_am_label);
+        mAmPmToggles = (LinearLayout) view.findViewById(R.id.ampm_toggles);
+        mAmTextView = (TextView) view.findViewById(R.id.am_label);
         mAmTextView.setOnKeyListener(keyboardListener);
-        mPmTextView = (TextView) view.findViewById(R.id.bsp_pm_label);
+        mPmTextView = (TextView) view.findViewById(R.id.pm_label);
         mPmTextView.setOnKeyListener(keyboardListener);
         String[] amPmTexts = new DateFormatSymbols().getAmPmStrings();
         mAmText = amPmTexts[0];
@@ -262,15 +254,15 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
         mAmTextView.setText(mAmText);
         mPmTextView.setText(mPmText);
         // TODO: setOnKeyListener?
-        mHalfDayToggles = (LinearLayout) view.findViewById(R.id.bsp_half_day_toggles);
-        mFirstHalfDayToggle = (ImageView) view.findViewById(R.id.bsp_half_day_toggle_1);
+        mHalfDayToggles = (LinearLayout) view.findViewById(R.id.half_day_toggles);
+        mFirstHalfDayToggle = (ImageView) view.findViewById(R.id.half_day_toggle_1);
         mFirstHalfDayToggle.setOnKeyListener(keyboardListener);
-        mSecondHalfDayToggle = (ImageView) view.findViewById(R.id.bsp_half_day_toggle_2);
+        mSecondHalfDayToggle = (ImageView) view.findViewById(R.id.half_day_toggle_2);
         mSecondHalfDayToggle.setOnKeyListener(keyboardListener);
 
         // TODO: Restore
 //        mHapticFeedbackController = new HapticFeedbackController(getActivity());
-        mTimePicker = (GridPickerLayout) view.findViewById(R.id.bsp_time_picker);
+        mTimePicker = (GridPickerLayout) view.findViewById(R.id.time_picker);
         mTimePicker.setOnValueSelectedListener(this);
         mTimePicker.setOnKeyListener(keyboardListener);
         mTimePicker.initialize(getActivity(), /*mHapticFeedbackController,*/ mInitialHourOfDay,
@@ -303,7 +295,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
             }
         });
 
-        mDoneButton = (FloatingActionButton) view.findViewById(R.id.bsp_fab);
+        mDoneButton = (FloatingActionButton) view.findViewById(R.id.fab);
         mDoneButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -317,8 +309,8 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
         });
         mDoneButton.setOnKeyListener(keyboardListener);
 
-        mAmPmHitspace = view.findViewById(R.id.bsp_ampm_hitspace);
-        mHalfDaysHitspace = view.findViewById(R.id.bsp_half_days_hitspace);
+        mAmPmHitspace = view.findViewById(R.id.ampm_hitspace);
+        mHalfDaysHitspace = view.findViewById(R.id.half_days_hitspace);
         mAmPmHitspace.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -358,8 +350,8 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
         setMinute(mInitialMinute);
 
         // Set up for keyboard mode.
-        mDoublePlaceholderText = res.getString(R.string.bsp_time_placeholder);
-        mDeletedKeyFormat = res.getString(R.string.bsp_deleted_key);
+        mDoublePlaceholderText = res.getString(R.string.time_placeholder);
+        mDeletedKeyFormat = res.getString(R.string.deleted_key);
         mPlaceholderText = mDoublePlaceholderText.charAt(0);
         mAmKeyCode = mPmKeyCode = -1;
         generateLegalTimesTree();
@@ -389,9 +381,9 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
         mTimePicker.setTheme(getActivity().getApplicationContext(), mThemeDark);
 
         // Set the colors for each view based on the theme.
-        view.findViewById(R.id.bsp_time_display_background).setBackgroundColor(mHeaderColor);
-        view.findViewById(R.id.bsp_time_display).setBackgroundColor(mHeaderColor);
-        ((TextView) view.findViewById(R.id.bsp_separator)).setTextColor(mTimeSeparatorColor != 0
+        view.findViewById(R.id.time_display_background).setBackgroundColor(mHeaderColor);
+        view.findViewById(R.id.time_display).setBackgroundColor(mHeaderColor);
+        ((TextView) view.findViewById(R.id.separator)).setTextColor(mTimeSeparatorColor != 0
                 ? mTimeSeparatorColor : (mHeaderTextDark ? mBlackTextDisabled : mWhiteTextDisabled));
 
         // Color in normal state
@@ -425,17 +417,8 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
         int secondColor = amOrPm == HALF_DAY_2 ? mHalfDaySelectedColor : mHalfDayUnselectedColor;
 
         if (mIs24HourMode) {
-            final Drawable firstHalfDayToggle = mFirstHalfDayToggle.getDrawable();
-            final Drawable secondHalfDayToggle = mSecondHalfDayToggle.getDrawable();
-            if (Utils.checkApiLevel(Build.VERSION_CODES.LOLLIPOP)) {
-                firstHalfDayToggle.setTint(firstColor);
-                secondHalfDayToggle.setTint(secondColor);
-            } else {
-                // Ignore the Lint warning that says the casting is redundant;
-                // it is in fact necessary.
-                ((VectorDrawableCompat) firstHalfDayToggle).setTint(firstColor);
-                ((VectorDrawableCompat) secondHalfDayToggle).setTint(secondColor);
-            }
+            ((VectorDrawableCompat) mFirstHalfDayToggle.getDrawable()).setTint(firstColor);
+            ((VectorDrawableCompat) mSecondHalfDayToggle.getDrawable()).setTint(secondColor);
         } else {
             mAmTextView.setTextColor(firstColor);
             mPmTextView.setTextColor(secondColor);
@@ -1024,12 +1007,6 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
         private int mHalfDayButtonColorSelected;
         private int mHalfDayButtonColorUnselected;
 
-        /**
-         * @param listener      How the parent is notified that the time is set.
-         * @param hourOfDay     The initial hour-of-day of the dialog.
-         * @param minute        The initial minute of the dialog.
-         * @param is24HourMode  Whether the dialog should be configured for 24-hour mode.
-         */
         public Builder(OnTimeSetListener listener, int hourOfDay, int minute, boolean is24HourMode) {
             super(listener, is24HourMode);
             mHour = hourOfDay;
@@ -1039,7 +1016,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
         /**
          * Set the color of the header text when it is selected.
          */
-        public Builder setHeaderTextColorSelected(int color) {
+        public Builder setHeaderTextColorSelected(@ColorInt int color) {
             mHeaderTextColorSelected = color;
             return this;
         }
@@ -1047,7 +1024,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
         /**
          * Set the color of the header text when it is not selected.
          */
-        public Builder setHeaderTextColorUnselected(int color) {
+        public Builder setHeaderTextColorUnselected(@ColorInt int color) {
             mHeaderTextColorUnselected = color;
             return this;
         }
@@ -1055,7 +1032,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
         /**
          * Set the color of the time separator that separates the hour and minute views in the header.
          */
-        public Builder setTimeSeparatorColor(int color) {
+        public Builder setTimeSeparatorColor(@ColorInt int color) {
             mTimeSeparatorColor = color;
             return this;
         }
@@ -1064,7 +1041,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
          * Set the color of the AM/PM text when it is selected. This is equivalent to
          * {@link #setHalfDayButtonColorSelected(int)} in 24-hour time.
          */
-        public Builder setAmPmTextColorSelected(int color) {
+        public Builder setAmPmTextColorSelected(@ColorInt int color) {
             setHalfDayButtonColorSelected(color);
             return this;
         }
@@ -1073,7 +1050,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
          * Set the color of the AM/PM text when it is not selected. This is equivalent to
          * {@link #setHalfDayButtonColorUnselected(int)} in 24-hour time.
          */
-        public Builder setAmPmTextColorUnselected(int color) {
+        public Builder setAmPmTextColorUnselected(@ColorInt int color) {
             setHalfDayButtonColorUnselected(color);
             return this;
         }
@@ -1082,7 +1059,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
          * Set the color of the half-day image button when it is selected. This is equivalent to
          * {@link #setAmPmTextColorSelected(int)} in 12-hour time.
          */
-        public Builder setHalfDayButtonColorSelected(int color) {
+        public Builder setHalfDayButtonColorSelected(@ColorInt int color) {
             mHalfDayButtonColorSelected = color;
             return this;
         }
@@ -1091,7 +1068,7 @@ public class GridTimePickerDialog extends BottomSheetTimePickerDialog
          * Set the color of the half-day image button when it is not selected. This is equivalent to
          * {@link #setAmPmTextColorUnselected(int)} in 12-hour time.
          */
-        public Builder setHalfDayButtonColorUnselected(int color) {
+        public Builder setHalfDayButtonColorUnselected(@ColorInt int color) {
             mHalfDayButtonColorUnselected = color;
             return this;
         }

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.os.Bundle;
-
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -214,13 +214,13 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
                              Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        mDayOfWeekView = (TextView) view.findViewById(R.id.bsp_date_picker_header);
+        mDayOfWeekView = (TextView) view.findViewById(R.id.date_picker_header);
         mDayOfWeekView.setTypeface(Utils.SANS_SERIF_LIGHT_BOLD);
-        mMonthDayYearView = (LinearLayout) view.findViewById(R.id.bsp_date_picker_month_day_year);
-        mFirstTextView = (TextView) view.findViewById(R.id.bsp_date_picker_first_textview);
+        mMonthDayYearView = (LinearLayout) view.findViewById(R.id.date_picker_month_day_year);
+        mFirstTextView = (TextView) view.findViewById(R.id.date_picker_first_textview);
         mFirstTextView.setOnClickListener(this);
         mFirstTextView.setTypeface(Utils.SANS_SERIF_LIGHT_BOLD);
-        mSecondTextView = (TextView) view.findViewById(R.id.bsp_date_picker_second_textview);
+        mSecondTextView = (TextView) view.findViewById(R.id.date_picker_second_textview);
         mSecondTextView.setOnClickListener(this);
         mSecondTextView.setTypeface(Utils.SANS_SERIF_LIGHT_BOLD);
 
@@ -274,12 +274,12 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
         mYearPickerView.setOnScrollListener(this);
 
         Resources res = getResources();
-        mDayPickerDescription = res.getString(R.string.bsp_day_picker_description);
-        mSelectDay = res.getString(R.string.bsp_select_day);
-        mYearPickerDescription = res.getString(R.string.bsp_year_picker_description);
-        mSelectYear = res.getString(R.string.bsp_select_year);
+        mDayPickerDescription = res.getString(R.string.day_picker_description);
+        mSelectDay = res.getString(R.string.select_day);
+        mYearPickerDescription = res.getString(R.string.year_picker_description);
+        mSelectYear = res.getString(R.string.select_year);
 
-        mAnimator = (AccessibleDateAnimator) view.findViewById(R.id.bsp_animator);
+        mAnimator = (AccessibleDateAnimator) view.findViewById(R.id.animator);
         mAnimator.addView(mDayPickerView);
         mAnimator.addView(mYearPickerView);
         mAnimator.setDateMillis(mCalendar.getTimeInMillis());
@@ -292,7 +292,7 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
         animation2.setDuration(ANIMATION_DURATION);
         mAnimator.setOutAnimation(animation2);
 
-        mDoneButton = (Button) view.findViewById(R.id.bsp_done);
+        mDoneButton = (Button) view.findViewById(R.id.done);
         mDoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -305,7 +305,7 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
             }
         });
 
-        mCancelButton = (Button) view.findViewById(R.id.bsp_cancel);
+        mCancelButton = (Button) view.findViewById(R.id.cancel);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -319,11 +319,11 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
 
         mAnimator.setBackgroundColor(mBackgroundColor);
         mDayPickerView.setAccentColor(mAccentColor);
-        view.findViewById(R.id.bsp_day_picker_selected_date_layout).setBackgroundColor(mHeaderColor);
+        view.findViewById(R.id.day_picker_selected_date_layout).setBackgroundColor(mHeaderColor);
 
         if (mThemeDark) {
             final int selectableItemBg = ContextCompat.getColor(activity,
-                    R.color.bsp_selectable_item_background_dark);
+                    R.color.selectable_item_background_dark);
             Utils.setColorControlHighlight(mCancelButton, selectableItemBg);
             Utils.setColorControlHighlight(mDoneButton, selectableItemBg);
         }
@@ -332,7 +332,7 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
         // requested and apply it.
         if (mHeaderTextDark) {
             final ColorStateList colors = ContextCompat.getColorStateList(activity,
-                    R.color.bsp_date_picker_selector_light);
+                    R.color.date_picker_selector_light);
             mDayOfWeekView.setTextColor(colors);
             mFirstTextView.setTextColor(colors);
             mSecondTextView.setTextColor(colors);
@@ -479,15 +479,18 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
     }
 
     private String extractYearFromFormattedDate(String formattedDate, String monthAndDay) {
-        final String year = YEAR_FORMAT.format(mCalendar.getTime());
-        for (String part : formattedDate.split(monthAndDay)) {
-            if (part.contains(year)) {
+        String[] parts = formattedDate.split(monthAndDay);
+        for (String part : parts) {
+            // If the locale's date format is (MD)Y, then split(MD) = {"", Y}.
+            // If it is Y(MD), then split(MD) = {Y}. "Trailing empty strings are
+            // [...] not included in the resulting array."
+            if (!part.isEmpty()) {
                 return part;
             }
         }
         // We will NEVER reach here, as long as the parameters are valid strings.
         // We don't want this because it is not localized.
-        return year;
+        return YEAR_FORMAT.format(mCalendar.getTime());
     }
 
     private void updateDisplay(boolean announce) {
@@ -508,13 +511,13 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
         if (monthDayStart != -1 && yearStart != -1) {
             if (mLocaleMonthDayIndex < mLocaleYearIndex) {
                 if (yearStart - monthDayEnd <= 2) {
-                    monthAndDay = fullDate.substring(0, yearStart);
+                    monthAndDay = fullDate.substring(monthDayStart, yearStart);
                     year = fullDate.substring(yearStart, fullDate.length());
                     processed = true;
                 }
             } else {
                 if (monthDayStart - yearEnd <= 2) {
-                    year = fullDate.substring(0, monthDayStart);
+                    year = fullDate.substring(yearStart, monthDayStart);
                     monthAndDay = fullDate.substring(monthDayStart, fullDate.length());
                     processed = true;
                 }
@@ -553,6 +556,7 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
             // The month-day is already formatted appropriately
             year = extractYearFromFormattedDate(fullDate, monthAndDay);
         }
+
 
         mFirstTextView.setText(mLocaleMonthDayIndex == 0 ? monthAndDay : year);
         mSecondTextView.setText(mLocaleMonthDayIndex == 0 ? year : monthAndDay);
@@ -616,10 +620,7 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
      */
     public void setMinDate(Calendar calendar) {
         mMinDate = calendar;
-
-        if (mDayPickerView != null) {
-            mDayPickerView.onChange();
-        }
+        setYearRange(calendar.get(Calendar.YEAR), mMaxYear);
     }
 
     /**
@@ -639,10 +640,7 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
      */
     public void setMaxDate(Calendar calendar) {
         mMaxDate = calendar;
-
-        if (mDayPickerView != null) {
-            mDayPickerView.onChange();
-        }
+        setYearRange(mMinYear, calendar.get(Calendar.YEAR));
     }
 
     /**
@@ -661,28 +659,28 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
     /**
      * Set the color of the header text when it is selected.
      */
-    public final void setHeaderTextColorSelected(int color) {
+    public final void setHeaderTextColorSelected(@ColorInt int color) {
         mHeaderTextColorSelected = color;
     }
 
     /**
      * Set the color of the header text when it is not selected.
      */
-    public final void setHeaderTextColorUnselected(int color) {
+    public final void setHeaderTextColorUnselected(@ColorInt int color) {
         mHeaderTextColorUnselected = color;
     }
 
     /**
      * Set the color of the day-of-week header text when it is selected.
      */
-    public final void setDayOfWeekHeaderTextColorSelected(int color) {
+    public final void setDayOfWeekHeaderTextColorSelected(@ColorInt int color) {
         mDayOfWeekHeaderTextColorSelected = color;
     }
 
     /**
      * Set the color of the day-of-week header text when it is not selected.
      */
-    public final void setDayOfWeekHeaderTextColorUnselected(int color) {
+    public final void setDayOfWeekHeaderTextColorUnselected(@ColorInt int color) {
         mDayOfWeekHeaderTextColorUnselected = color;
     }
 
@@ -701,9 +699,9 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
     @Override
     public void onClick(View v) {
         tryVibrate();
-        if (v.getId() == R.id.bsp_date_picker_second_textview) {
+        if (v.getId() == R.id.date_picker_second_textview) {
             setCurrentView(mLocaleMonthDayIndex == 0 ? YEAR_VIEW : MONTH_AND_DAY_VIEW);
-        } else if (v.getId() == R.id.bsp_date_picker_first_textview) {
+        } else if (v.getId() == R.id.date_picker_first_textview) {
             setCurrentView(mLocaleMonthDayIndex == 0 ? MONTH_AND_DAY_VIEW : YEAR_VIEW);
         }
     }
@@ -811,7 +809,7 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
 
     @Override
     protected int contentLayout() {
-        return R.layout.bsp_date_picker_dialog;
+        return R.layout.date_picker_dialog;
     }
 
     private static ColorStateList createColorStateList(int selectedColor, int unselectedColor) {
@@ -839,12 +837,6 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
         private int mDayOfWeekHeaderTextColorSelected;
         private int mDayOfWeekHeaderTextColorUnselected;
 
-        /**
-         * @param listener    How the parent is notified that the date is set.
-         * @param year        The initial year of the dialog.
-         * @param monthOfYear The initial month of the dialog.
-         * @param dayOfMonth  The initial day of the dialog.
-         */
         public Builder(OnDateSetListener listener, int year, int monthOfYear, int dayOfMonth) {
             mListener = listener;
             mYear = year;
@@ -886,6 +878,7 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
          */
         public Builder setMinDate(Calendar calendar) {
             mMinDate = calendar;
+            setYearRange(calendar.get(Calendar.YEAR), mMaxYear);
             return this;
         }
 
@@ -897,13 +890,14 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
          */
         public Builder setMaxDate(Calendar calendar) {
             mMaxDate = calendar;
+            setYearRange(mMinYear, calendar.get(Calendar.YEAR));
             return this;
         }
 
         /**
          * Set the color of the header text when it is selected.
          */
-        public Builder setHeaderTextColorSelected(int color) {
+        public Builder setHeaderTextColorSelected(@ColorInt int color) {
             mHeaderTextColorSelected = color;
             return this;
         }
@@ -911,7 +905,7 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
         /**
          * Set the color of the header text when it is not selected.
          */
-        public Builder setHeaderTextColorUnselected(int color) {
+        public Builder setHeaderTextColorUnselected(@ColorInt int color) {
             mHeaderTextColorUnselected = color;
             return this;
         }
@@ -919,7 +913,7 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
         /**
          * Set the color of the day-of-week header text when it is selected.
          */
-        public Builder setDayOfWeekHeaderTextColorSelected(int color) {
+        public Builder setDayOfWeekHeaderTextColorSelected(@ColorInt int color) {
             mDayOfWeekHeaderTextColorSelected = color;
             return this;
         }
@@ -927,7 +921,7 @@ public class DatePickerDialog extends BottomSheetPickerDialog implements
         /**
          * Set the color of the day-of-week header text when it is not selected.
          */
-        public Builder setDayOfWeekHeaderTextColorUnselected(int color) {
+        public Builder setDayOfWeekHeaderTextColorUnselected(@ColorInt int color) {
             mDayOfWeekHeaderTextColorUnselected = color;
             return this;
         }

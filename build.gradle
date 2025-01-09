@@ -1,16 +1,14 @@
-// Plugins block (must be placed after buildscript {})
-// plugins {
-//     id 'maven-publish'
-// }
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
     repositories {
-        google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.0.0'
+        classpath 'com.android.tools.build:gradle:8.1.4'
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
+//        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -19,9 +17,11 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
+        maven {
+            url "https://maven.google.com"
+        }
+        google()
     }
 }
 
@@ -33,15 +33,17 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-// Common Android configurations
 ext {
-    minSdkVersion = 21
-    targetSdkVersion = 33
-    compileSdkVersion = 33
-    buildToolsVersion = '33.0.2'
+    // Sdk and tools
+    minSdkVersion = 14
+    targetSdkVersion = 25
+    compileSdkVersion = 25
+    buildToolsVersion = '25.0.3'
 
+    // BottomSheetPickers versioning
     versionName = '2.4.1'
     versionCode = 11
 
-    supportLibraryVersion = '33.0.0'
+    // Library dependencies
+    supportLibraryVersion = '25.4.0'
 }

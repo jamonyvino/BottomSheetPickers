@@ -23,7 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -134,17 +134,17 @@ class PagingDayPickerView extends LinearLayout implements OnDateChangedListener,
         setLayoutParams(new LayoutParams(MATCH_PARENT, MATCH_PARENT));
 
         Resources res = getResources();
-        MONTH_NAVIGATION_BAR_SIZE = res.getDimensionPixelOffset(R.dimen.bsp_month_navigation_bar_height)
-                + res.getDimensionPixelOffset(R.dimen.bsp_month_view_top_padding);
+        MONTH_NAVIGATION_BAR_SIZE = res.getDimensionPixelOffset(R.dimen.month_navigation_bar_height)
+                + res.getDimensionPixelOffset(R.dimen.month_view_top_padding);
 
-        final View view = LayoutInflater.from(context).inflate(R.layout.bsp_day_picker_content, this, true);
-        mMonthAnimator = (DayPickerViewAnimator) findViewById(R.id.bsp_month_animator);
-        mMonthPickerView = (MonthPickerView) findViewById(R.id.bsp_month_picker);
+        final View view = LayoutInflater.from(context).inflate(R.layout.day_picker_content, this, true);
+        mMonthAnimator = (DayPickerViewAnimator) findViewById(R.id.month_animator);
+        mMonthPickerView = (MonthPickerView) findViewById(R.id.month_picker);
         mMonthPickerView.setOnMonthClickListener(this);
-        mViewPager = (ViewPager) findViewById(R.id.bsp_viewpager);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mViewPager.addOnPageChangeListener(this);
-        mMonthYearTitleView = (TextView) view.findViewById(R.id.bsp_month_year_title);
-        mTitleContainer = view.findViewById(R.id.bsp_month_year_title_container);
+        mMonthYearTitleView = (TextView) view.findViewById(R.id.month_year_title);
+        mTitleContainer = view.findViewById(R.id.month_year_title_container);
         mTitleContainer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,7 +152,7 @@ class PagingDayPickerView extends LinearLayout implements OnDateChangedListener,
                 setupCurrentView(newIndex, true);
             }
         });
-        mPreviousButton = (ImageButton) view.findViewById(R.id.bsp_prev);
+        mPreviousButton = (ImageButton) view.findViewById(R.id.prev);
         mPreviousButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,7 +162,7 @@ class PagingDayPickerView extends LinearLayout implements OnDateChangedListener,
                 }
             }
         });
-        mNextButton = (ImageButton) view.findViewById(R.id.bsp_next);
+        mNextButton = (ImageButton) view.findViewById(R.id.next);
         mNextButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,26 +173,26 @@ class PagingDayPickerView extends LinearLayout implements OnDateChangedListener,
             }
         });
 
-        mArrowDownDrawable = AnimatedVectorDrawableCompat.create(context, R.drawable.bsp_animated_arrow_drop_down);
-        mArrowUpDrawable   = AnimatedVectorDrawableCompat.create(context, R.drawable.bsp_animated_arrow_drop_up);
+        mArrowDownDrawable = AnimatedVectorDrawableCompat.create(context, R.drawable.animated_arrow_drop_down);
+        mArrowUpDrawable   = AnimatedVectorDrawableCompat.create(context, R.drawable.animated_arrow_drop_up);
         setArrowDrawableOnTitle(mArrowDownDrawable);
 
         // Theme-specific configurations.
         if (mThemeDark) {
-            int selectableItemBg = getColor(context, R.color.bsp_selectable_item_background_dark);
+            int selectableItemBg = getColor(context, R.color.selectable_item_background_dark);
             Utils.setColorControlHighlight(mPreviousButton, selectableItemBg);
             Utils.setColorControlHighlight(mNextButton, selectableItemBg);
             Utils.setColorControlHighlight(mTitleContainer, selectableItemBg);
-            int cursor = getColor(context, R.color.bsp_text_color_secondary_dark);
+            int cursor = getColor(context, R.color.text_color_secondary_dark);
             Utils.applyTint(mPreviousButton, cursor);
             Utils.applyTint(mNextButton, cursor);
         }
 
         // Set up colors.
         int monthYearTitleColor = getColor(context, mThemeDark?
-                R.color.bsp_text_color_primary_dark : R.color.bsp_text_color_primary_light);
+                R.color.text_color_primary_dark : R.color.text_color_primary_light);
         int dropdownArrowColor = getColor(context, mThemeDark?
-                R.color.bsp_icon_color_active_dark : R.color.bsp_icon_color_active_light);
+                R.color.icon_color_active_dark : R.color.icon_color_active_light);
 
         mMonthYearTitleView.setTextColor(monthYearTitleColor);
         mArrowDownDrawable.setTint(dropdownArrowColor);
@@ -211,7 +211,7 @@ class PagingDayPickerView extends LinearLayout implements OnDateChangedListener,
         mThemeDark = themeDark;
     }
 
-    void setAccentColor(int color) {
+    void setAccentColor(@ColorInt int color) {
         mAccentColor = color;
         mMonthPickerView.setCurrentMonthTextColor(color);
         mMonthPickerView.setSelectedCirclePaintColor(color);

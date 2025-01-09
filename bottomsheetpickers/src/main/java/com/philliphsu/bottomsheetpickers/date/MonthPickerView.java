@@ -6,7 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
-
+import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -24,7 +24,7 @@ import static com.philliphsu.bottomsheetpickers.date.PagingDayPickerView.MONTH_N
 /**
  * Grid view of selectable months.
  */
-public final class MonthPickerView extends View {
+final class MonthPickerView extends View {
     private static final String TAG = "MonthPickerView";
     
     private static final int NUM_COLUMNS = 3;
@@ -73,22 +73,22 @@ public final class MonthPickerView extends View {
 
         mShortMonthLabels = new DateFormatSymbols().getShortMonths();
 
-        mNormalTextColor = getColor(context, R.color.bsp_text_color_primary_light);
+        mNormalTextColor = getColor(context, R.color.text_color_primary_light);
         // Same as background color
-        mSelectedMonthTextColor = getColor(context, R.color.bsp_date_picker_view_animator);
+        mSelectedMonthTextColor = getColor(context, R.color.date_picker_view_animator);
         mCurrentMonthTextColor = Utils.getThemeAccentColor(context);
-        mDisabledMonthTextColor = getColor(context, R.color.bsp_text_color_disabled_light);
+        mDisabledMonthTextColor = getColor(context, R.color.text_color_disabled_light);
 
         Calendar now = Calendar.getInstance();
         mCurrentMonth = now.get(Calendar.MONTH);
         mCurrentYear = now.get(Calendar.YEAR);
 
-        MONTH_LABEL_TEXT_SIZE = res.getDimensionPixelSize(R.dimen.bsp_month_picker_month_label_size);
-        MONTH_SELECTED_CIRCLE_SIZE = res.getDimensionPixelSize(R.dimen.bsp_month_select_circle_radius);
+        MONTH_LABEL_TEXT_SIZE = res.getDimensionPixelSize(R.dimen.month_picker_month_label_size);
+        MONTH_SELECTED_CIRCLE_SIZE = res.getDimensionPixelSize(R.dimen.month_select_circle_radius);
 
-        mRowHeight = (res.getDimensionPixelOffset(R.dimen.bsp_date_picker_view_animator_height)
+        mRowHeight = (res.getDimensionPixelOffset(R.dimen.date_picker_view_animator_height)
                 - MONTH_NAVIGATION_BAR_SIZE) / NUM_ROWS;
-        mEdgePadding = res.getDimensionPixelSize(R.dimen.bsp_month_view_edge_padding);
+        mEdgePadding = res.getDimensionPixelSize(R.dimen.month_view_edge_padding);
 
         // TODO: Set up accessibility components.
         // Sets up any standard paints that will be used
@@ -136,9 +136,9 @@ public final class MonthPickerView extends View {
 
     void setTheme(Context context, boolean themeDark) {
         if (themeDark) {
-            mNormalTextColor = getColor(context, R.color.bsp_text_color_primary_dark);
-            mSelectedMonthTextColor = getColor(context, R.color.bsp_dark_gray);
-            mDisabledMonthTextColor = getColor(context, R.color.bsp_text_color_disabled_dark);
+            mNormalTextColor = getColor(context, R.color.text_color_primary_dark);
+            mSelectedMonthTextColor = getColor(context, R.color.dark_gray);
+            mDisabledMonthTextColor = getColor(context, R.color.text_color_disabled_dark);
             initView();
         }
     }
@@ -149,7 +149,7 @@ public final class MonthPickerView extends View {
      * Make sure to call {@link #initView()} after calling this so that our Paints can be updated.
      * </p>
      */
-    void setCurrentMonthTextColor(int color) {
+    void setCurrentMonthTextColor(@ColorInt int color) {
         mCurrentMonthTextColor = color;
     }
 
@@ -159,7 +159,7 @@ public final class MonthPickerView extends View {
      * Make sure to call {@link #initView()} after calling this so that our Paints can be updated.
      * </p>
      */
-    void setSelectedCirclePaintColor(int color) {
+    void setSelectedCirclePaintColor(@ColorInt int color) {
         mSelectedCirclePaint.setColor(color);
     }
 
